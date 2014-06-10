@@ -7,12 +7,24 @@
 //
 
 #import "moviesAppDelegate.h"
+#import "MoviesViewController.h"
 
 @implementation moviesAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    MoviesViewController *vc = [[MoviesViewController alloc] init];
+    
+    UINavigationController *uvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    uvc.navigationBar.barTintColor = [UIColor purpleColor];
+    uvc.navigationBar.translucent = NO;
+    
+    self.window.rootViewController = uvc;
+    
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
