@@ -11,11 +11,14 @@
 #import "MovieDetailController.h"
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface MoviesViewController() <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet
     UITableView *tableView;
+
 @property (nonatomic, strong) NSArray *movies;
+@property (nonatomic, strong) UIView *errorView;
 @end
 @implementation MoviesViewController
 
@@ -28,6 +31,30 @@
     return self;
 }
 
+- (void)addErrorView
+{
+    CGRect  viewRect = CGRectMake(0, 0, 350, 30);
+    
+    _errorView = [[UIView alloc] initWithFrame:viewRect];
+    _errorView.backgroundColor = [UIColor blueColor];
+    
+    UILabel *yourLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300, 20)];
+    
+    [yourLabel setTextColor:[UIColor whiteColor]];
+    [yourLabel setBackgroundColor:[UIColor clearColor]];
+    [yourLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 14.0f]];
+    
+    [yourLabel setText:@"network error"];
+    
+    [_errorView addSubview:yourLabel];
+    NSLog(@"adding sub");
+    [self.view addSubview:_errorView];
+    [self.view bringSubviewToFront:_errorView];
+    
+    _errorView.hidden = true;
+    NSLog(@"subbing");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,38 +64,34 @@
     
     self.tableView.delegate = self;
     
+    [self addErrorView];
+    
+    
     // Do any additional setup after loading the view from its nib.
     
     NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
-    
-    NSURL *baseURL = [NSURL URLWithString:url];
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
-    
-    NSOperationQueue *operationQueue = manager.operationQueue;
-    [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        switch (status) {
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                [operationQueue setSuspended:NO];
-                break;
-            case AFNetworkReachabilityStatusNotReachable:
-            default:
-                [operationQueue setSuspended:YES];
-                break;
-        }
-    }];
-    
-    
 
+   
+[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     AFHTTPRequestOperationManager *httpmanager = [AFHTTPRequestOperationManager manager];
     [httpmanager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
      //   NSLog(@"JSON: %@", responseObject);
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"fetching data");
         self.movies = responseObject[@"movies"];
         
         [self.tableView reloadData];
+        
+        
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"Error: %@", error);
+        _errorView.hidden = false;
+        
     }];
    
     self.tableView.dataSource = self;
@@ -85,6 +108,8 @@
 {
     // do your refresh here...
     NSLog(@"doing refresh");
+    [self viewDidLoad];
+    
     return;
 }
 

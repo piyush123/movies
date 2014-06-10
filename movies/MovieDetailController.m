@@ -10,6 +10,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
+#import <MBProgressHUD.h>
+
 
 @interface MovieDetailController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -40,6 +42,7 @@
     
     NSLog(@"going to load MovieDetail");
     
+    
     NSDictionary *movie = self.movie;
     
     self.movieName.text = movie[@"title"];
@@ -52,12 +55,12 @@
     
     NSDictionary *posters = movie[@"posters"];
     
-    NSString *thumbnail_string = [posters objectForKey:@"detailed"];
+    NSString *detailed_string = [posters objectForKey:@"detailed"];
     
-    NSURL *thumbnail = [[NSURL alloc]initWithString:thumbnail_string];
+    NSURL *detailed_image = [[NSURL alloc]initWithString:detailed_string];
    
    
-    [self.poster setImageWithURL:thumbnail];
+    [self.poster setImageWithURL:detailed_image];
     
     
     //self.backgroundView=imageView;
@@ -78,7 +81,9 @@
     self.scrollView.backgroundColor = [UIColor clearColor];//colorWithAlphaComponent:0.7f];
     
     NSLog(@"MOVIE: %@", movie);
-   
+    
+    
+
     
 }
 
