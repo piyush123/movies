@@ -56,11 +56,26 @@
     NSDictionary *posters = movie[@"posters"];
     
     NSString *detailed_string = [posters objectForKey:@"detailed"];
+       
+    //Asynchronous image downloading must be implemented using the UIImageView category in the AFNetworking library.
     
-    NSURL *detailed_image = [[NSURL alloc]initWithString:detailed_string];
-   
-   
-    [self.poster setImageWithURL:detailed_image];
+
+    UIImageView *weakPoster = self.poster;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:
+                             [NSURL URLWithString:detailed_string]];
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.poster setImageWithURLRequest:request
+                                placeholderImage:nil
+                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                             NSLog(@"got image");
+                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                             weakPoster.image = image;
+                                             [weakPoster setNeedsLayout];
+                                         } failure:nil];
+    
+    //[self.poster setImageWithURL:detailed_image];
     
     
     //self.backgroundView=imageView;

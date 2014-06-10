@@ -99,18 +99,21 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
     
     
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
-}
+    
+   }
 
-- (void)handleRefresh:(id)sender
-{
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
     // do your refresh here...
     NSLog(@"doing refresh");
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self viewDidLoad];
-    
-    return;
+
+    [refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,9 +151,22 @@
     
     NSString *thumbnail_string = [posters objectForKey:@"thumbnail"];
     
-    NSURL *thumbnail = [[NSURL alloc]initWithString:thumbnail_string];
+   // NSURL *thumbnail = [[NSURL alloc]initWithString:thumbnail_string];
     
-    [movieCell.posterView setImageWithURL:thumbnail];
+    NSURLRequest *request = [NSURLRequest requestWithURL:
+                             [NSURL URLWithString:thumbnail_string]];
+    
+//    [movieCell.posterView setImageWithURL:thumbnail];
+    
+    MovieCell *weakMovieCell = movieCell;
+    
+    [movieCell.posterView setImageWithURLRequest:request
+                               placeholderImage:nil
+                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                            NSLog(@"got image");
+                                            weakMovieCell.posterView.image = image;
+                                            [weakMovieCell setNeedsLayout];
+                                        } failure:nil];
     
     return movieCell;
 }
