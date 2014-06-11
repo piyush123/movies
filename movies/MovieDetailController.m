@@ -47,6 +47,8 @@
     NSDictionary *movie = self.movie;
     
     self.movieName.text = movie[@"title"];
+
+    [[self movieName] setFont:[UIFont fontWithName:@"HelveticaNeue" size:24]];
     [self.movieName sizeToFit];
     self.synopsis.text = movie[@"synopsis"];
     
@@ -76,10 +78,6 @@
                                              [weakPoster setNeedsLayout];
                                          } failure:nil];
     
-    //[self.poster setImageWithURL:detailed_image];
-    
-    
-    //self.backgroundView=imageView;
     
     // recompute the size of the background view now that we know the height of the synopsis label
     CGRect newBackgroundViewFrame = self.backgroundView.frame;
@@ -88,14 +86,14 @@
     self.backgroundView.frame = newBackgroundViewFrame;
 
     
-    self.backgroundView.backgroundColor = [UIColor clearColor];
-    //self.backgroundView.alpha = 0.75;
+    self.backgroundView.backgroundColor = [UIColor blackColor];
+    self.backgroundView.alpha = 0.75;
     
     // now set the content height of the scroll view to the background view's y-offset+height
     // note: the -180 balances out most of the extra height we added to the background view above (now the actual bottom of the scroll view will be 20 pts past the last label, and the remaining 180 pts of the background view will extend past the end to cover the overscroll region)
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width, self.backgroundView.frame.origin.y + self.backgroundView.frame.size.height - 180)];
     
-    self.scrollView.backgroundColor = [UIColor blackColor ];
+    self.scrollView.backgroundColor = [UIColor clearColor ];
     self.scrollView.alpha = 0.75;
     
     NSLog(@"MOVIE: %@", movie);
