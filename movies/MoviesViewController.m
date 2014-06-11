@@ -83,8 +83,7 @@
         self.movies = responseObject[@"movies"];
         
         [self.tableView reloadData];
-        
-        
+    
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -160,6 +159,8 @@
 //    [movieCell.posterView setImageWithURL:thumbnail];
     
     MovieCell *weakMovieCell = movieCell;
+    
+  //  movieCell.posterImage setImageWithURL:[NSURL URLWithString:movie.posters[@"profile"]]];
     
     [movieCell.posterView setImageWithURLRequest:request
                                placeholderImage:nil

@@ -35,10 +35,10 @@
     //Here we declare a shared NSURLCache with 2mb of memory and 100mb of disk space
     
     //For Image caching that is used by AFNetworking
-    // NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
-    //                                                         diskCapacity:200 * 1024 * 1024
-    //                                                         diskPath:nil];
-    //[NSURLCache setSharedURLCache:URLCache];
+    //NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+    //                                                        diskCapacity:200 * 1024 * 1024
+     //                                                        diskPath:nil];
+    //[NSURLCache setSharedURLCache:sharedCache];
         
     return YES;
 }

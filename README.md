@@ -1,4 +1,6 @@
-Creating the Project README
+#RottenTomatoes README
+
+##Creating the Project README
 
 In your project repository, add a file named README.md at the root. Required elements to include in the README for the project (see example):
 
