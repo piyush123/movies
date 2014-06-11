@@ -111,6 +111,7 @@
     // do your refresh here...
     NSLog(@"doing refresh");
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    _errorView.hidden=true;
     [self viewDidLoad];
 
     [refreshControl endRefreshing];
@@ -167,6 +168,7 @@
                                             weakMovieCell.posterView.image = image;
                                             [weakMovieCell setNeedsLayout];
                                         } failure:nil];
+    
     
     return movieCell;
 }

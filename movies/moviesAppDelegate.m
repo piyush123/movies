@@ -28,6 +28,18 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    //http://blog.originate.com/blog/2014/02/20/afimagecache-vs-nsurlcache/
+    //
+    //
+    //Here we declare a shared NSURLCache with 2mb of memory and 100mb of disk space
+    
+    //For Image caching that is used by AFNetworking
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                         diskCapacity:200 * 1024 * 1024
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+        
     return YES;
 }
 

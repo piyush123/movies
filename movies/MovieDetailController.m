@@ -42,6 +42,7 @@
     
     NSLog(@"going to load MovieDetail");
     
+    self.view.backgroundColor = [UIColor clearColor];
     
     NSDictionary *movie = self.movie;
     
@@ -85,15 +86,17 @@
     // note: the +200 adds padding to the bottom so that the background extends past the bottom of the label. we want some padding below the label, plus we want the background to extend past the end of the scroll view to cover the overscroll region.
     newBackgroundViewFrame.size.height = self.synopsis.frame.origin.y + self.synopsis.frame.size.height + 200;
     self.backgroundView.frame = newBackgroundViewFrame;
-    self.backgroundView.backgroundColor = [UIColor blackColor]; //colorWithAlphaComponent:0.95];
+
     
-   
+    self.backgroundView.backgroundColor = [UIColor clearColor];
+    self.backgroundView.alpha = 0.75;
     
     // now set the content height of the scroll view to the background view's y-offset+height
     // note: the -180 balances out most of the extra height we added to the background view above (now the actual bottom of the scroll view will be 20 pts past the last label, and the remaining 180 pts of the background view will extend past the end to cover the overscroll region)
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width, self.backgroundView.frame.origin.y + self.backgroundView.frame.size.height - 180)];
     
-    self.scrollView.backgroundColor = [UIColor clearColor];//colorWithAlphaComponent:0.7f];
+    self.scrollView.backgroundColor = [UIColor blackColor ];
+    self.scrollView.alpha = 0.75;
     
     NSLog(@"MOVIE: %@", movie);
     
