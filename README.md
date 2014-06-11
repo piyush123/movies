@@ -21,7 +21,8 @@ Optional:
 
 1.Customize the navigation bar. (optional) Styled Navigation Controller for iOS7, color
 
-
+I had some problem with caching, will debug and finish
+optional stuff tomorrow.
 
 GIF walkthrough of all required and optional stories (using LiceCap)
 
