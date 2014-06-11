@@ -18,20 +18,17 @@ Required:
 
 Optional:
 
-1.Customize the navigation bar. (optional)
-   Styled Navigation Controller for iOS7, color
+1.Customize the navigation bar. (optional) Styled Navigation Controller for iOS7, color
 
-2. Caching Implementation. 
 
-3.  
 
 GIF walkthrough of all required and optional stories (using LiceCap)
 
 
 Acknowledgements:
 
-Mattt Thompson - AFNetworking 
-Matej Bukovinski-  MBProgressHud 
+* Mattt Thompson - AFNetworking 
+* Matej Bukovinski-  MBProgressHud 
 			https://github.com/jdg/MBProgressHUD
 
 License:
