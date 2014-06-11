@@ -26,6 +26,9 @@ optional stuff tomorrow.
 
 GIF walkthrough of all required and optional stories (using LiceCap)
 
+* Licecap Video
+
+https://raw.githubusercontent.com/piyush123/movies/master/rottenTomatoes.gif
 
 Acknowledgements:
 
