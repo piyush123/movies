@@ -10,11 +10,12 @@ How many hours did it take to complete?
 Which required and optional stories have you completed?
 
 Required:
-1. User can view a list of movies from Rotten Tomatoes.  	   Poster images must be loading asynchronously.
-2. User can view movie details by tapping on a cell
-3. User sees loading state while waiting for movies API.    
-4. User sees error message when there's a networking error. 
-5. User can pull to refresh the movie list.
+* User can view a list of movies from Rotten Tomatoes.  	   Poster images must be loading asynchronously.
+* User can view movie details by tapping on a cell
+* User sees loading state while waiting for movies API.
+(hard to see on gif but working)    
+* User sees error message when there's a networking error. 
+* User can pull to refresh the movie list.
 
 Optional:
 
