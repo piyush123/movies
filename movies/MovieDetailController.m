@@ -89,7 +89,7 @@
 
     
     self.backgroundView.backgroundColor = [UIColor clearColor];
-    self.backgroundView.alpha = 0.75;
+    //self.backgroundView.alpha = 0.75;
     
     // now set the content height of the scroll view to the background view's y-offset+height
     // note: the -180 balances out most of the extra height we added to the background view above (now the actual bottom of the scroll view will be 20 pts past the last label, and the remaining 180 pts of the background view will extend past the end to cover the overscroll region)
